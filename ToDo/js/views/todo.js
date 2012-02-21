@@ -11,6 +11,7 @@ define([
             this.template = _.template('<input id="new-todo" placeholder="What needs to be done?" type="text" /><select id="prio"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select><button id="submit">Spara</button>');
             _.bindAll(this, 'render', 'addAll', 'addOne', 'newPost');
             this.collection.bind('add', this.addOne);
+
         },
         render: function () {
             $(this.el).html(this.template);
@@ -29,8 +30,12 @@ define([
         newPost: function (e) {
             var t = this.$("#new-todo").val();
             var p = this.$("#prio").val();
-            this.collection.add(new postModel({ Text: t, Prio: p }));
-
+            var currentTime = new Date();
+            var month = currentTime.getMonth() + 1;
+            var fulltime = currentTime.getDate() + "/" + month + " " + currentTime.getHours() + ":" + currentTime.getMinutes();
+            this.collection.add(new postModel({ Text: this.$("#new-todo").val(), Prio: this.$("#prio").val(), Date: fulltime }));
+            this.$("#prio").val("");
+            this.$("#new-todo").val("");
         },
         events: {
             "click #submit": "newPost"

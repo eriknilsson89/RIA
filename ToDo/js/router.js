@@ -15,7 +15,7 @@ define([
         initialize: function () {
             _.bindAll(this, 'main');
             posts = new Posts;
-            posts.url = '/todo';
+            posts.url = '/posts';
             posts.fetch();
             this.collections.posts = posts;
 

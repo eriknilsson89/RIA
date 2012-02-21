@@ -4,20 +4,22 @@ define([
   'Backbone'    // lib/backbone/backbone
 ], function ($, _, Backbone) {
     TodoListViewEntry = Backbone.View.extend({
+        el: $("#todolist"),
         initialize: function (options) {
-            this.template = _.template("<ul><li><span class='text'>{{Text}}</span><span class='prio'>{{Prio}}</span><span class='createdAt'>Skapad {{Date}}</span><span class='remove'>X</span></li></ul>");
+            this.template = _.template("<li><span class='text'>"+this.model.get('Text')+"</span><span class='prio'>"+this.model.get('Prio')+"</span><span class='createdAt'>Skapad "+this.model.get('Date')+"</span><span class='remove'>X</span></li>");
             _.bindAll(this, "remove", "handleDelete");
             options.model.bind('change', this.render, this);
             options.model.bind('destroy', this.remove);
         },
         render: function () {
-            $(this.el).html(this.template(this.model.toJSON()));
+            $(this.el).append(this.template(this.model.toJSON));
         },
         events: {
             "click .remove": "handleDelete"
         },
-        remove: function () {
-            $(this.el).remove();
+        remove: function (e) {
+            var id = $(e.currentTarget).data("id");
+            alert(id);
         },
         handleDelete: function (e) {
             this.model.destroy();
