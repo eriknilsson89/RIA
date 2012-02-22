@@ -5,16 +5,18 @@ define([
   'postCollection',
   'postModel'
 ], function ($, _, Backbone, postCollection, postModel) {
-
     todoListView = Backbone.View.extend({
+        el: $("#content"),
         initialize: function (options) {
-            this.template = _.template('<input id="new-todo" placeholder="What needs to be done?" type="text" /><select id="prio"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select><button id="submit">Spara</button>');
+            this.ulTemplate = _.template('<ul id="todolist"></ul>');
+            this.formTemplate = _.template('<input id="new-todo" placeholder="What needs to be done?" type="text" /><select id="prio"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select><button id="submit">Spara</button>');
             _.bindAll(this, 'render', 'addAll', 'addOne', 'newPost');
             this.collection.bind('add', this.addOne);
 
         },
         render: function () {
-            $(this.el).html(this.template);
+            $(this.el).html(this.formTemplate);
+            $(this.el).append(this.ulTemplate);
             this.addAll();
             return this;
         },
