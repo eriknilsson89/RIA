@@ -12,6 +12,7 @@ require.config({
         AppRouter: 'router'
     }
 });
-require(['app'], function (App) {
+require(['app', 'Underscore'], function (App, _) {
+    window._ = _;
     App.initialize();
 });

@@ -3,7 +3,7 @@ define([
   'postModel'
 ], function (Backbone, postModel) {
     postCollection = Backbone.Collection.extend({
-        //localStorage: new Store("posts"),
+        localStorage: new Store("posts"),
         model: postModel
 
     });
