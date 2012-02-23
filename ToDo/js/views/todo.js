@@ -10,6 +10,7 @@ define([
         initialize: function (options) {
             this.ulTemplate = _.template('<ul id="todolist"></ul>');
             this.formTemplate = _.template('<input id="new-todo" placeholder="What needs to be done?" type="text" /><select id="prio"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select><button id="submit">Spara</button>');
+            this.sortTemplate = _.template('<div id="sortDiv"><span id="sortByAlph">Sortera i bokstavsordning </span><span id="sortByPrio">Sortera efter prioritet </span><span id="sortByTag">Sortera efter tagg </span></div>');
             _.bindAll(this, 'render', 'addAll', 'addOne', 'newPost');
             this.collection.bind('add', this.addOne);
 
@@ -17,6 +18,7 @@ define([
         render: function () {
             $(this.el).html(this.formTemplate);
             $(this.el).append(this.ulTemplate);
+            $(this.el).append(this.sortTemplate);
             this.addAll();
             return this;
         },
@@ -26,22 +28,54 @@ define([
         addOne: function (model) {
             view = new TodoListViewEntry({ model: model });
             view.render();
-            this.$("#todolist").append(view.el);
+            $("#todolist").append(view.el);
             model.save();
         },
         newPost: function (e) {
-            var t = this.$("#new-todo").val();
-            var p = this.$("#prio").val();
             var currentTime = new Date();
             var month = currentTime.getMonth() + 1;
             var fulltime = currentTime.getDate() + "/" + month + " " + currentTime.getHours() + ":" + currentTime.getMinutes();
-            this.collection.add(new postModel({ Text: this.$("#new-todo").val(), Prio: this.$("#prio").val(), Date: fulltime }));
+            this.collection.add(new postModel({ Text: this.$("#new-todo").val(), Prio: this.$("#prio").val(), Date: fulltime, Tag: this.getTag() }));
             this.$("#prio").val("");
             this.$("#new-todo").val("");
         },
+        getTag: function () {
+            if ($("#taglist input:radio:checked").val() == undefined) {
+                return "None";
+            }
+            return $("#taglist input:radio:checked").val();
+        },
         events: {
-            "click #submit": "newPost"
-        }
+            "click #submit": "newPost",
+            "click #sortByPrio": "sortByPrio",
+            "click #sortByTag": "sortByTag",
+            "click #sortByAlph": "sortByName"
+        },
+        sortByPrio: function () {
+            this.majorSortFunction("Prio");
+        },
+        sortByTag: function () {
+            this.majorSortFunction("Tag");
+        },
+        sortByName: function () {
+            this.majorSortFunction("Text");
+
+        },
+        majorSortFunction: function (type) {
+            var model = this.collection.models;
+            var alphabetic = this.collection.sortBy(function (model) {
+                return model.get(type);
+            });
+            $("#todolist").html("");
+            _.each(alphabetic, function (model) {
+                view = new TodoListViewEntry({ model: model });
+                view.render();
+                $("#todolist").append(view.el);
+                model.save();
+            });
+            this.currentSort = type;
+        },
+        currentSort: "Text"
     });
     return todoListView;
 });

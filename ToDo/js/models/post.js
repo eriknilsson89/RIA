@@ -7,9 +7,10 @@ define([
             ID: -1,
             Text: "Kom ihåg",
             Prio: 1,
-            Date: Date
+            Date: Date,
+            Tag: "None"
         }
     });
-    
+
     return postModel;
 });

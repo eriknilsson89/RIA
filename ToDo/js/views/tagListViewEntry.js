@@ -4,19 +4,25 @@ define([
   'Backbone'    // lib/backbone/backbone
 ], function ($, _, Backbone) {
     tagListViewEntry = Backbone.View.extend({
-        tagName: 'option',
-        className: 'tag',
+        tagName: 'input',
         initialize: function (options) {
-            this.template = _.template("<span>"+this.model.get("Text")+"</span>");
+            $(this.el).attr("type", "radio");            
+            $(this.el).attr("name", "tag");
             _.bindAll(this);
             options.model.bind('change', this.render, this);
             options.model.bind('destroy', this.remove);
         },
         render: function () {
-            $(this.el).html(this.template(this.model.toJSON));
+            $(this.el).attr("value", this.model.get("Text"));
         },
         events: {
-
+            "click .removeTag": "handleDelete",
+        },
+        handleDelete: function (e) {
+            this.model.destroy();
+        },
+        remove: function (e) {
+            $(this.el).remove();
         }
     });
 return tagListViewEntry;

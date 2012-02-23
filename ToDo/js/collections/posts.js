@@ -4,8 +4,7 @@ define([
 ], function (Backbone, postModel) {
     postCollection = Backbone.Collection.extend({
         localStorage: new Store("posts"),
-        model: postModel
-
-    });
+        model: postModel,
+     });
     return postCollection
 });
