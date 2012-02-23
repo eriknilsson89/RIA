@@ -9,7 +9,11 @@ require.config({
         TodoListViewEntry: 'views/TodoListViewEntry',
         baseView: 'views/baseView',
         appView: 'views/appView',
-        AppRouter: 'router'
+        AppRouter: 'router',
+        tagView: 'views/tagList',
+        tagListViewEntry: 'views/tagListViewEntry',
+        tagCollection: 'collections/tags',
+        tagModel: 'models/tag'
     }
 });
 require(['app', 'Underscore'], function (App, _) {

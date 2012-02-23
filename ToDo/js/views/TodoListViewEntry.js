@@ -14,7 +14,6 @@ define([
         render: function () {
             $(this.el).html(this.template(this.model.toJSON));
             this.setText();
-
         },
         events: {
             "click .remove": "handleDelete",

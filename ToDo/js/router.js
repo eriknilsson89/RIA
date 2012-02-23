@@ -3,8 +3,9 @@ define([
   'Underscore', // lib/underscore/underscore
   'Backbone',    // lib/backbone/backbone
   'appView',
-  'postCollection'
-], function ($, _, Backbone, appView, Posts) {
+  'postCollection',
+  'tagCollection'
+], function ($, _, Backbone, appView, Posts, Tags) {
     AppRouter = Backbone.Router.extend({
         routes: {
             "": "main",
@@ -15,11 +16,13 @@ define([
         initialize: function () {
             _.bindAll(this, 'main');
             posts = new Posts;
-            posts.url = '/posts';
             posts.fetch();
             this.collections.posts = posts;
+            tags = new Tags;
+            tags.fetch();
+            this.collections.tags = tags;
 
-            appview = new appView({ todoPosts: posts });
+            appview = new appView({ todoPosts: posts, todoTags: tags });
             $("#container").append(appView.el);
             this.views.main = appview
         },
