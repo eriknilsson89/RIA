@@ -16,7 +16,6 @@ require.config({
         tagModel:           'models/tag'
     }
 });
-require(['app', 'Underscore'], function (App, _) {
-    window._ = _;
+require(['app', 'Underscore'], function (App) {
     App.initialize();
 });

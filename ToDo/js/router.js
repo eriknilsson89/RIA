@@ -15,6 +15,7 @@ define([
         views: {},
         initialize: function () {
             _.bindAll(this, 'main');
+            //skapar nya collections och plockar ut data som finns lagrat och ger till dem
             posts = new Posts;
             posts.fetch();
             this.collections.posts = posts;

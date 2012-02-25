@@ -1,3 +1,28 @@
+body {background: #c2bef0; font-family: Helvetica, Verdana, Sans-Serif;}
+#container { margin: auto; width: 1000px; height: auto; }
+#content { margin: auto; width: 920px; min-height: 700px; height: auto;background: #0e6eff; overflow: auto;}
+
+#new-todo {width: 400px; height: 60px; margin: 30px 0 10px 30px; font-size: 20px;}
+.priospan {display: block; margin: 0 0 0 175px; color: White; }
+#submit {display: inline; background: White; padding: 0 20px; margin: 0 30px; }
+#todolistdiv {float: left;  }
+#todolist {list-style: none; color: White; width: 400px; margin-left: -10px;}
+#todolist li {width: 400px; min-height: 60px; border: 1px solid #4b4b4b; }
+.text {font-size: 14px; margin: 5px; }
+.prio {font-size: 10px; margin: 5px; }
+.createdAt {font-size: 10px; margin: 5x; }
+.tag {font-size: 10px; margin: 5px;}
+.remove {font-size: 10px; margin: 5px; text-decoration: underline;}
+.edit {font-size: 10px; margin: 5px; text-decoration: underline;}
+.done {}
+
+#sortDiv {font-size: 14px; margin: 5px;color: White; margin-left: 30px;}
+.sort {text-decoration: underline; margin: 8px;}
+
+#taglistdiv {float: right;}
+#new-tag {width: 400px; height: 60px; margin: 30px 30px 10px 0; font-size: 20px;}
+#tagSubmit {display: block; margin-left: 280px;  background: White; padding: 0 20px;}
+
 .editText { display: none; }
 .editPrio { display: none; }
 .editing { display: inline;}
