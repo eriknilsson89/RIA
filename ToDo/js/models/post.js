@@ -4,7 +4,6 @@ define([
 ], function (_, Backbone) {
     var postModel = Backbone.Model.extend({
         defaults: {
-            ID: -1,
             Text: "Kom ihåg",
             Prio: 1,
             Date: Date,

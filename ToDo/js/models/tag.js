@@ -4,7 +4,6 @@ define([
 ], function (_, Backbone) {
     var tagModel = Backbone.Model.extend({
         defaults: {
-            ID: -1,
             Text: "none"
         }
     });
