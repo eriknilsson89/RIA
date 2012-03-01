@@ -39,7 +39,13 @@ define([
         newTag: function (e) {
             //kollar först om taggen redan finns, isf visas en alert och det hela avbryts
             if (!this.collection.doesTagnameExist(this.$("#new-tag").val())) {
-                this.collection.add(new tagModel({ Text: this.$("#new-tag").val() }));
+            	//kollar om taggen är tom
+            	if (!this.isTagnameEmpty(this.$("#new-tag").val())) {
+            		this.collection.add(new tagModel({ Text: this.$("#new-tag").val() }));
+            	}
+            	else {
+            		alert("Taggen har ingen text!");
+            	}
             }
             else {
                 alert("Du har redan denna tagg!");
@@ -48,7 +54,14 @@ define([
         },
         events: {
             "click #tagSubmit": "newTag"
-        }        
+        },
+        //funktion som kollar om tagg-namnet är tomt
+        isTagnameEmpty: function (tagName) {
+        	if (tagName == "" || tagName == null) {
+        		return true;
+        	}
+            return false;
+        }
     });
     return tagListView;
 });
