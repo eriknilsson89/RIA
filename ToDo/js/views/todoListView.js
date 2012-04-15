@@ -46,10 +46,15 @@ define([
             var fulltime = currentTime.getDate() + "/" + month + " " + currentTime.getHours() + ":" + currentTime.getMinutes();
             //läser av satt prioritet och konverterar till int
             var prio = parseInt(this.$("#prio").val());
-            //skapar och lägger in posten i collection
-            this.collection.add(new postModel({ Text: this.$("#new-todo").val(), Prio: prio, Date: fulltime, Tag: this.getTag() }));
-            this.$("#prio").val("");
-            this.$("#new-todo").val("");
+            var text = $("#new-todo").val(); 
+            
+            if(text == '') {
+               alert('Posten har ingen text!'); 
+            } else {
+                //skapar och lägger in posten i collection
+                this.collection.add(new postModel({ Text: text, Prio: prio, Date: fulltime, Tag: this.getTag() }));
+            }
+      
         },
         //funktion som hämtar ut vilken tagg som är vald, är ingen vald så blir det None
         getTag: function () {
